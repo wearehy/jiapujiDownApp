@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>app下载页</title>
+		<link rel="stylesheet" type="text/css" href="static/css/app_load.css"/>
+        <style></style>
+    </head>
+    <body>
+		<div class="content">
+			<div class="head">
+				<img class="home" src="static/images/home.png" >
+				<div class="head_content">
+					<div  class="head_top">
+						<ul>
+							<li class='ht_all ht_01'>
+								<img src="static/images/logo.png" >
+							</li>
+							<li class='ht_all ht_02'>
+								<img src="static/images/logo_font.png" >
+							</li>
+							<li class='ht_all ht_03'>
+								<img src="static/images/border_01.png" >
+								<div class="ht_font_03">
+									<text>杭州齐家文化传播有限公司</text>
+
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="head_middle">
+						<img class="border_02" src="static/images/border_02.png" >
+						<div class="hm_font">
+							<div class="hmf_all hmf_01">
+								<text>"</text>家谱纪<text>,</text>
+							</div>
+							<div class="hmf_all hmf_02">
+								记载每一个人"
+							</div>
+						</div>
+					</div>
+					<div class="head_foot">
+						1000万用户修谱首选,等你加入
+					</div>
+
+				</div>
+				<div class="fix">
+					<img class="hft" src="static/images/Finger.png" >
+				</div>
+			</div>
+			<div class="body">
+				点击下载加入家谱纪
+				<div class="line">
+					
+				</div>
+			</div>
+			<div class="foot">
+			
+				<div class="dowloads">
+					<!-- android  -->
+					<!-- <a href="http://p.gdown.baidu.com/4757ce5d298a66d2cd4600a0f4c0af586b2f54c89608fd08964ef62d86ba643fee36dac6c913ab0f0c73991dc20b6e6b278147ca4d2ab0d82093102d7e6c0d3e5860561ee4f92ec57c3357dfc3d15742518ca92e40c751cf10ce9983c35f9398bfe84aab87e0514f29224917f0c5522e3e8f761278ea01f6b8d391647a5af58665ec34f923c3ad31">
+						<img src="./static/images/20191205151801.png" />
+					</a> -->
+					<a id="andriod" >
+						<img src="./static/images/20191205151801.png" />
+					</a>
+					<!-- ios -->
+					<a href="https://apps.apple.com/cn/app/id1483730717">
+						<img src="./static/images/20191205152951.png" />
+					</a>
+				</div>
+				<div class="code">
+					<img class="btn" src='static/images/app_qr.png'>
+				</div>
+				<!-- <div class="btn">
+					<a href="http://p.gdown.baidu.com/4757ce5d298a66d2cd4600a0f4c0af586b2f54c89608fd08964ef62d86ba643fee36dac6c913ab0f0c73991dc20b6e6b278147ca4d2ab0d82093102d7e6c0d3e5860561ee4f92ec57c3357dfc3d15742518ca92e40c751cf10ce9983c35f9398bfe84aab87e0514f29224917f0c5522e3e8f761278ea01f6b8d391647a5af58665ec34f923c3ad31">
+						<img  src='static/images/btn_load.png'>
+					</a>
+
+				</div> -->
+			</div>
+		</div>
+		<div id="wx">
+			<div class="zz"></div>
+			<img src="static/images/wx.png" >
+		</div>
+		<script type="text/javascript">
+			var andhref1 = 'https://api.jiapuji.vip/gateway/oauth2/download/url/get',andhref2;
+			
+			function btnAnd(url){	 
+				
+				 //创建核心对象
+				 xhr= null;
+					if (window.XMLHttpRequest) {// code for Firefox, Opera, IE7, etc.
+						xhr = new XMLHttpRequest();
+					} else if (window.ActiveXObject) {// code for IE6, IE5
+						xhr = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					//编写回调函数
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							// alert(xhr.responseText)
+							andhref2 = xhr.responseText
+							document.getElementById('andriod').href = JSON.parse(andhref2).data.url;
+						}
+					}
+					//open设置请求方式和请求路径
+					xhr.open("get", url);//一个servlet，后面还可以写是否同步
+					//send 发送
+					xhr.send();
+				
+
+			}
+			btnAnd(andhref1);
+			// console.log(111,andhref1,andhref2)
+			// 判断pc或移动
+			function IsPC() {
+			   var userAgentInfo = navigator.userAgent;
+			   var Agents = ["Android", "iPhone",
+			      "SymbianOS", "Windows Phone",
+			      "iPad", "iPod"];
+			   var flag = true;
+			   for (var v = 0; v < Agents.length; v++) {
+			      if (userAgentInfo.indexOf(Agents[v]) > 0) {
+			         flag = false;
+			         break;
+			      }
+			   }
+			   return flag;
+			}
+			// 判断是否是在微信打开
+			var is_weixin = (function(){return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1})();
+			console.log(is_weixin)
+			// 判断浏览器
+			// ??? 貌似只能判断pc端浏览器的名称
+			window.onload=function(){
+
+
+				if(!IsPC()){
+					if(is_weixin){
+						document.getElementById('wx').style.display='block';
+					}
+
+				}
+			}
+
+		</script>
+    </body>
+</html>
